@@ -1,0 +1,44 @@
+{% extends 'admin/layout.njk' %}
+
+{% block content %}
+    <main>
+        
+        <div class="show-recipe">
+
+           <div class="top-form">
+                        
+                <div>
+                    <h1 class="top-title-create">
+                        Receita: {{ recipe.title }}
+                    </h1>
+                </div>
+
+                <div class="grid-button">
+                    <a href="/admin/recipes/{{ recipe.id }}/edit" class="button">Editar Receita</a>
+                    {# <a href="/" id="cancelar" class="button">Cancelar</a> #}
+                </div>
+
+            </div>
+            
+            <div class="layout-img">
+                <img src="{{ recipe.image }}" alt=""/>
+            </div>
+
+            <div class="card-body">
+                
+                <p class="top-title h5">
+                    {{ recipe.title }}
+                </p>
+                <p class="top-author">
+                    por
+                    {{ recipe.author }}
+                </p>
+            </div>
+
+            {% include "recipes-details.njk" %}
+        </div>
+
+    </main>
+
+        <script src="/script.js"></script>
+    {% endblock %}

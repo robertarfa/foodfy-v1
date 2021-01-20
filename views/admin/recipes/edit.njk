@@ -1,0 +1,63 @@
+{% extends 'admin/layout.njk' %}
+
+{% block content %}
+
+    <main>
+
+        <form id="putForm" action="/admin/recipes?_method=PUT" method="POST" class="form">
+
+        <input type="hidden" name="id" value="{{ recipe.id }}">
+            <div class="form-box">
+
+                <div class="form-details">
+
+                    <div class="top-form">
+
+                        <div>
+                            <h1 class="top-title-create">
+                                Editando receita
+                            </h1>
+                        </div>
+
+
+                        <div class="grid-button">
+                            <button type="Submit" class="delete">Deletar</button>
+                            <button type="Submit">Salvar Receita</button>
+                            {# <a href="/" id="cancelar" class="button">Cancelar</a> #}
+                        </div>
+
+                        
+                    </div>
+                        
+                        {% include './fields.njk' %}
+                
+                </div>
+                 
+            </div>
+            
+        </form>
+    </main>
+
+    <script>
+        let method = 'PUT'
+        document
+            .querySelector('.delete')
+            .addEventListener('click', function (event) {
+                method = 'DELETE'
+            })
+        document
+            .querySelector('form')
+            .addEventListener('submit', function (event) {
+                document
+                    .querySelector('form')
+                    .action = `/admin/recipes?_method=${method}`
+                if (method === 'DELETE') {
+                    const confirmation = confirm('Desejar realmente deletar?')
+                    if (!confirmation) {
+                        event.preventDefault()
+                        method = 'PUT'
+                    }
+                }
+            })
+    </script>
+{% endblock %}
